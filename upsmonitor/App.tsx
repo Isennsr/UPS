@@ -1,5 +1,6 @@
 import Welcome from 'components/Welcome';
 import Battery from 'components/Battery';
+import FanSettings from 'components/FanSettings';
 import './global.css';
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
       <section className="mx-2 flex flex-col">
         <Battery number={1} />
         <Battery number={2} />
+        <FanSettings temp1={25} temp2={31} />
       </section>
     </div>
   );

@@ -1,0 +1,34 @@
+{
+  "data": {
+    "status": "OK",
+    "timestamp": 13728351,
+    "t1": 20,
+    "t2": -273.15,
+    "IBat1": -1.92,
+    "IBat2": -20,
+    "IAC": -25.60938,
+    "ISolar": -25.8,
+    "vBat": 15,
+    "vAc": 0,
+    "vSolarIn": 0,
+    "vSolarOut": 0,
+    "fan1Mode": 3,
+    "fan2Mode": 3,
+    "fan1StartUpTemp": 35,
+    "fan1ShutOffTemp": 30,
+    "fan2StartUpTemp": 40,
+    "fan2ShutOffTemp": 35,
+    "acChargeStartVoltage": 27,
+    "acChargeStopVoltage": 29
+  },
+  "set": {
+    "fan": {
+      "mode": [
+        {
+          "fan": 1,
+          "mode": 2
+        }
+      ]
+    }
+  }
+}

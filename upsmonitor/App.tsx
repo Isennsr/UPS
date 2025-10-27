@@ -10,34 +10,50 @@ import { useState, useEffect } from 'react';
 
 import { RefreshCw, Loader2, Zap } from 'lucide-react';
 
-const API_ENDPOINT = 'http://192.168.4.1/data';
+const API_ENDPOINT = 'http://localhost:3000';
 
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
+  const [temperatureReading, setTemperatureReading] = useState([true, true]);
 
   const fetchDataAndSetState = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(API_ENDPOINT, { cache: 'no-store' });
+      const response = await fetch(`${API_ENDPOINT}/data`, { cache: 'no-store' });
 
       if (!response.ok) {
         throw new Error(`HTTP Error! Status: ${response.status}`);
       }
-
       const json = await response.json();
-      setData(json);
+
+      let targetData = json;
+
+      // Check if we have sensor reading
+      if (targetData.t1 < -50) {
+        setTemperatureReading((prevReading) => {
+          const newReading = [...prevReading];
+          newReading[0] = false;
+          return newReading;
+        });
+      }
+      if (targetData.t2 < -50) {
+        setTemperatureReading((prevReading) => {
+          const newReading = [...prevReading];
+          newReading[1] = false;
+          return newReading;
+        });
+      }
+
+      setData(targetData);
     } catch (e) {
       if (e instanceof Error) {
-        // TypeScript now knows 'e' has a 'message' property
         setError(new Error(`Failed to connect to ESP32: ${e.message}`));
       } else if (typeof e === 'string') {
-        // Handle cases where the exception is just a string (less common, but possible)
         setError(new Error(`Failed to connect to ESP32: ${e}`));
       } else {
-        // Handle truly unknown or non-standard error objects
         setError(new Error('Failed to connect to ESP32: An unknown error occurred.'));
       }
     } finally {
@@ -57,18 +73,25 @@ export default function App() {
 
     // The dependency array is empty because fetchDataAndSetState is stable (not recreated on every render).
   }, []);
+
+  console.log(data);
   return (
     <ScrollView
-      className="font-hand flex w-full flex-col bg-sky-950"
+      className="font-hand flex w-full flex-col bg-black"
       contentContainerStyle={{ flexGrow: 1 }}>
-      <Welcome />
-      <View className="flex-1 bg-gray-800">
+      <Welcome loading={loading} />
+      <View className="flex-1">
         {data ? (
           <View className="mx-2 flex flex-col">
-            <Battery number={1} />
-            <Battery number={2} />
-            <FanStatus temp1={25} temp2={31} />
-            <FanSettings />
+            <Battery number={1} voltage={data.vBat} current={data.IBat1} />
+            <Battery number={2} voltage={data.vBat} current={data.IBat2} />
+            <FanSettings
+              endpoint={API_ENDPOINT}
+              fan1mode={data.fan1Mode}
+              fan2mode={data.fan2Mode}
+              data={data}
+              temperatureReading={temperatureReading}
+            />
           </View>
         ) : loading ? (
           <div

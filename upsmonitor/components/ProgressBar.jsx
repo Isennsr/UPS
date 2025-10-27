@@ -7,8 +7,8 @@ const VIEWBOX_SIZE = 100;
 const EPSILON = 0.5; // Small buffer for clean arc start
 
 // Hardcoded Color Values
-const PRIMARY_COLOR = '#082f49'; // sky-950 (Progress Fill)
-const TRACK_COLOR = '#d1d5db'; // gray-300 (Track)
+const PRIMARY_COLOR = '#0069a8'; // sky-950 (Progress Fill)
+const TRACK_COLOR = '#cecade'; // gray-300 (Track)
 
 // ARC CONFIGURATION
 const ARC_PERCENTAGE = 0.7; // 70% of a full circle
@@ -17,8 +17,14 @@ const ARC_PERCENTAGE = 0.7; // 70% of a full circle
 const FINAL_ARC_ROTATION = 144;
 
 const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }) => {
-  // 1. Calculate Progress (Clamped)
-  let progressPercent = (value - min) / (max - min);
+  const absoluteValue = Math.abs(value);
+
+  // The maximum magnitude for the progress bar is determined by max
+  // We assume min is 0 or less, but for progress calculation, we treat the range as 0 to max.
+  const progressMax = Math.abs(max);
+
+  // 1. Calculate Progress (Clamped) based on absolute value
+  let progressPercent = (absoluteValue - min) / (progressMax - min);
   progressPercent = Math.min(1, Math.max(0, progressPercent));
 
   // 2. SVG Math
@@ -51,9 +57,7 @@ const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }
   const trackDashArray = `${VISIBLE_ARC_LENGTH} ${HIDDEN_GAP_LENGTH}`;
 
   return (
-    // 🛑 Ensure this opening tag is clean
     <View style={{ width: size, height: size, position: 'relative' }}>
-      {/* 🛑 Ensure <Svg> starts cleanly without extra characters/spaces */}
       <Svg width="100%" height="100%" viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}>
         {/* Track Circle */}
         <Circle
@@ -87,7 +91,7 @@ const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }
         />
       </Svg>
 
-      {/* Text Layer */}
+      {/* Text Layer - Uses original 'value' to display the correct sign */}
       <View
         style={{
           position: 'absolute',
@@ -99,6 +103,7 @@ const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }
           alignItems: 'center',
         }}>
         <Text style={{ color: PRIMARY_COLOR, fontSize: 18, fontWeight: 'bold' }}>
+          {/* Display original value, which includes the negative sign if present */}
           {value.toFixed(2)}
         </Text>
       </View>

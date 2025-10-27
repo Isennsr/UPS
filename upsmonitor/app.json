@@ -30,6 +30,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.isennsr.upscontrol"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9b541999-228a-4801-8ff8-f0d84bbb9c7f"
       }
     }
   }

@@ -43,9 +43,9 @@ const FanStatus = ({ temp1, temp2 }) => {
 
   return (
     <View className="my-2 flex w-full flex-col rounded-md border-2 border-amber-300 bg-white px-3 shadow-lg">
-      <Text className="flex flex-row justify-between text-lg text-black">Fan Settings</Text>
+      <Text className="flex flex-row justify-around  text-lg text-black">Fan Status</Text>
 
-      <View className="flex flex-row justify-between">
+      <View className="flex flex-row justify-around">
         <View className="flex flex-col py-4">
           {/* Sensor 1 Reading */}
           <View className="mb-1 flex flex-row">

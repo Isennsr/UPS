@@ -6,25 +6,83 @@ import './global.css';
 import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import Footer from 'components/Footer';
 import { useFonts, JustAnotherHand_400Regular } from '@expo-google-fonts/just-another-hand';
+import { useState, useEffect } from 'react';
+
+import { RefreshCw, Loader2, Zap } from 'lucide-react';
+
+const API_ENDPOINT = 'http://192.168.4.1/data';
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    // Give the font a simple name for internal use
-    JustAnotherHand: JustAnotherHand_400Regular,
-  });
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<any>(null);
 
-  if (!fontsLoaded) {
-    return <ActivityIndicator size="large" />;
-  }
+  const fetchDataAndSetState = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(API_ENDPOINT, { cache: 'no-store' });
 
+      if (!response.ok) {
+        throw new Error(`HTTP Error! Status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      setData(json);
+    } catch (e) {
+      if (e instanceof Error) {
+        // TypeScript now knows 'e' has a 'message' property
+        setError(new Error(`Failed to connect to ESP32: ${e.message}`));
+      } else if (typeof e === 'string') {
+        // Handle cases where the exception is just a string (less common, but possible)
+        setError(new Error(`Failed to connect to ESP32: ${e}`));
+      } else {
+        // Handle truly unknown or non-standard error objects
+        setError(new Error('Failed to connect to ESP32: An unknown error occurred.'));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // 1. Call the async function here.
+    fetchDataAndSetState();
+
+    // 2. We can also add the 5-second polling loop here, as requested earlier.
+    const intervalId = setInterval(fetchDataAndSetState, 5000);
+
+    // 3. Return a cleanup function to clear the interval when the component unmounts.
+    return () => clearInterval(intervalId);
+
+    // The dependency array is empty because fetchDataAndSetState is stable (not recreated on every render).
+  }, []);
   return (
-    <ScrollView className="font-hand flex w-full flex-col bg-sky-950">
+    <ScrollView
+      className="font-hand flex w-full flex-col bg-sky-950"
+      contentContainerStyle={{ flexGrow: 1 }}>
       <Welcome />
-      <View className="mx-2 flex flex-col">
-        <Battery number={1} />
-        <Battery number={2} />
-        <FanStatus temp1={25} temp2={31} />
-        <FanSettings />
+      <View className="flex-1 bg-gray-800">
+        {data ? (
+          <View className="mx-2 flex flex-col">
+            <Battery number={1} />
+            <Battery number={2} />
+            <FanStatus temp1={25} temp2={31} />
+            <FanSettings />
+          </View>
+        ) : loading ? (
+          <div
+            className="relative m-3 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+            role="alert">
+            <strong className="font-bold">Error!</strong>
+            <span className="ml-2 block sm:inline">{error}</span>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center p-10">
+            <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+            <p className="mt-4 text-gray-600">Loading data...</p>
+          </div>
+        )}
       </View>
       <Footer />
     </ScrollView>

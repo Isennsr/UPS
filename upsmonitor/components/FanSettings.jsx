@@ -1,6 +1,5 @@
-import { View, Text, TextInput } from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
-import { useState, useEffect } from 'react';
 import FanSetter from './FanSetter';
 import VoltageControl from './VoltageControl';
 import FanStatus from './FanStatus';
@@ -47,7 +46,7 @@ const FanSettings = ({
           <TempInput fanNumber={2} start={0} temp={data.fan1ShutOffTemp} />
         </View>
 
-        <VoltageControl />
+        <VoltageControl data={data} />
       </View>
     </View>
   );

@@ -76,7 +76,6 @@ export default function App() {
     // The dependency array is empty because fetchDataAndSetState is stable (not recreated on every render).
   }, []);
 
-  console.log(data);
   return (
     <ScrollView
       className="font-hand flex w-full flex-col bg-black"

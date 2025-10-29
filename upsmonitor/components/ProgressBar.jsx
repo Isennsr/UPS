@@ -7,7 +7,7 @@ const VIEWBOX_SIZE = 100;
 const EPSILON = 0.5; // Small buffer for clean arc start
 
 // Hardcoded Color Values
-const PRIMARY_COLOR = '#ffffff'; // sky-950 (Progress Fill)
+const PRIMARY_COLOR = '#00b8db'; // sky-950 (Progress Fill)
 const TRACK_COLOR = '#104e64'; // gray-300 (Track)
 
 // ARC CONFIGURATION

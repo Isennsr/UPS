@@ -4,6 +4,7 @@ import React from 'react';
 import { LoaderCircle } from 'lucide-react';
 const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleFanMode = async (mode) => {
     const payloadIndex = 'fan' + fanNumber + 'Mode';
@@ -26,14 +27,14 @@ const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
         console.error('API Error Response:', errorText);
         throw new Error(`POST failed with status: ${response.status}`);
       }
-
       // The result will be the object you sent, plus the new 'id'
       const result = await response.json();
-      console.log('Successfully Posted:', result);
-      // fanSetter(mode);
+      setLoading(false);
+      setError(false);
     } catch (error) {
       console.error('Error during POST:', error.message);
       setLoading(false);
+      setError(true);
     }
   };
 
@@ -65,6 +66,11 @@ const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
         </View>
       </View>
       {fanNumber == 1 ? <View className="my-1 border-b border-slate-700"></View> : <View></View>}
+      {error ? (
+        <Text className="text-xs text-red-400">Error: Could not change fan mode.</Text>
+      ) : (
+        <View></View>
+      )}
     </View>
   );
 };

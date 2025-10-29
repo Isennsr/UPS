@@ -17,6 +17,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
   const [temperatureReading, setTemperatureReading] = useState([true, true]);
+  const [lastUpdated, setLastUpdated] = useState<Date>(null);
 
   const fetchDataAndSetState = async () => {
     setLoading(true);
@@ -48,6 +49,7 @@ export default function App() {
       }
 
       setData(targetData);
+      setLastUpdated(new Date());
     } catch (e) {
       if (e instanceof Error) {
         setError(new Error(`Failed to connect to ESP32: ${e.message}`));
@@ -79,7 +81,7 @@ export default function App() {
     <ScrollView
       className="font-hand flex w-full flex-col bg-black"
       contentContainerStyle={{ flexGrow: 1 }}>
-      <Welcome loading={loading} />
+      <Welcome loading={loading} lastUpdated={lastUpdated} />
       <View className="flex-1">
         {data ? (
           <View className="mx-2 flex flex-col">
@@ -89,6 +91,8 @@ export default function App() {
               endpoint={API_ENDPOINT}
               fan1mode={data.fan1Mode}
               fan2mode={data.fan2Mode}
+              fan1IsRunning={data.fan1IsRunning}
+              fan2IsRunning={data.fan2IsRunning}
               data={data}
               temperatureReading={temperatureReading}
             />

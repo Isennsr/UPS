@@ -35,28 +35,30 @@ const Battery = ({ number, voltage, current }) => {
   // --- End Battery State Logic ---
 
   return (
-    <View className="my-2 flex w-full flex-col rounded-md bg-gray-50 px-3 shadow-lg">
+    <View className="my-2 flex w-full flex-col rounded-xl border border-slate-700 bg-slate-800 px-3 text-indigo-300 shadow-lg">
       <View className="flex flex-row items-center">
         {/* Dynamic Icon is rendered here, applying the determined color class */}
         <DynamicIcon className={`flex h-8 w-8 flex-col pr-1 ${iconColorClass}`} />
-        <Text className="flex flex-col justify-between text-lg">Battery {number} status</Text>
+        <Text className="flex flex-col justify-between text-lg text-indigo-300">
+          Battery {number} status
+        </Text>
       </View>
 
       <View className="my-2 flex flex-row justify-between">
         <View className="text-md flex flex-col items-center">
           <ProgressBar value={voltage} min={21} max={29.4} stroke={12} size={100} />
 
-          <Text className="mt-2 flex flex-col">Voltage(Volts)</Text>
+          <Text className="mt-2 flex flex-col text-gray-200">Voltage(Volts)</Text>
         </View>
 
         <View className="text-md flex flex-col items-center">
           <ProgressBar value={current} min={0} max={20} stroke={12} size={100} />
-          <Text className="mt-2 flex flex-row">Current(Amps)</Text>
+          <Text className="mt-2 flex flex-row text-gray-200">Current(Amps)</Text>
         </View>
 
         <View className="text-md flex flex-col items-center">
           <ProgressBar value={voltage * current} min={0} max={1000} stroke={12} size={100} />
-          <Text className="mt-2 flex text-center">Power(Watts)</Text>
+          <Text className="mt-2 flex text-center text-gray-200">Power(Watts)</Text>
         </View>
       </View>
     </View>

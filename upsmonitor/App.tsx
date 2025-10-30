@@ -2,13 +2,13 @@ import Welcome from 'components/Welcome';
 import Battery from 'components/Battery';
 import FanSettings from 'components/FanSettings';
 import './global.css';
-import { View, ScrollView} from 'react-native';
+import { View, ScrollView } from 'react-native';
 import Footer from 'components/Footer';
 import { useState, useEffect } from 'react';
 
-import { Loader2} from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
-const API_ENDPOINT = 'http://localhost:3000';
+const API_ENDPOINT = 'http://192.168.4.1';
 
 export default function App() {
   const [data, setData] = useState(null);
@@ -76,7 +76,7 @@ export default function App() {
 
   return (
     <ScrollView
-      className="font-sans flex w-full flex-col bg-black"
+      className="flex w-full flex-col bg-black font-sans"
       contentContainerStyle={{ flexGrow: 1 }}>
       <Welcome loading={loading} lastUpdated={lastUpdated} />
       <View className="flex-1">

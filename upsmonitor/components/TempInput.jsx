@@ -7,11 +7,12 @@ const TempInput = ({ fanNumber, start, temp }) => {
   const [value, setValue] = useState(temp);
 
   const handleTemp = async (value) => {
-    const payloadIndex = `fan${fanNumber}${start ? 'StartUpTemp' : 'ShutOffTemp'}`;
-
     const payload = {
-      [payloadIndex]: mode,
+      fan: fanNumber,
+      start: start,
+      temp: value,
     };
+
     const urlEncodedBody = new URLSearchParams(payload).toString();
     try {
       setLoading(true);
@@ -42,6 +43,7 @@ const TempInput = ({ fanNumber, start, temp }) => {
   useEffect(() => {
     if (value != temp) {
       setLoading(true);
+      handleTemp(value);
     } else {
       setLoading(false);
     }

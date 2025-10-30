@@ -1,14 +1,12 @@
 import Welcome from 'components/Welcome';
 import Battery from 'components/Battery';
 import FanSettings from 'components/FanSettings';
-import FanStatus from 'components/FanStatus';
 import './global.css';
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { View, ScrollView} from 'react-native';
 import Footer from 'components/Footer';
-import { useFonts, JustAnotherHand_400Regular } from '@expo-google-fonts/just-another-hand';
 import { useState, useEffect } from 'react';
 
-import { RefreshCw, Loader2, Zap } from 'lucide-react';
+import { Loader2} from 'lucide-react';
 
 const API_ENDPOINT = 'http://localhost:3000';
 
@@ -78,7 +76,7 @@ export default function App() {
 
   return (
     <ScrollView
-      className="font-hand flex w-full flex-col bg-black"
+      className="font-sans flex w-full flex-col bg-black"
       contentContainerStyle={{ flexGrow: 1 }}>
       <Welcome loading={loading} lastUpdated={lastUpdated} />
       <View className="flex-1">

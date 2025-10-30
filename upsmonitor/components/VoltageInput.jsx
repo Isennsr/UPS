@@ -6,9 +6,43 @@ const VoltageInput = ({ ac, voltage, disconnect }) => {
   const [value, setValue] = useState(voltage);
   const [loading, setLoading] = useState(false);
 
+  const handleVoltage = async (value) => {
+    const payload = {
+      start: !disconnect,
+      voltage: value,
+    };
+
+    const urlEncodedBody = new URLSearchParams(payload).toString();
+    try {
+      setLoading(true);
+      const response = await fetch(`${endpoint}/set/fan/mode`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: urlEncodedBody,
+      });
+
+      if (!response.ok) {
+        throw new Error(`POST failed with status: ${response.status}`);
+        console.error('API Error Response:', errorText);
+        throw new Error(`POST failed with status: ${response.status}`);
+      }
+
+      // The result will be the object you sent, plus the new 'id'
+      const result = await response.json();
+      console.log('Successfully Posted:', result);
+      // fanSetter(mode);
+    } catch (error) {
+      console.error('Error during POST:', error.message);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (value != voltage) {
       setLoading(true);
+      handleVoltage(value);
     } else {
       setLoading(false);
     }

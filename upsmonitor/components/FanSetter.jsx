@@ -7,9 +7,9 @@ const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
   const [error, setError] = useState(null);
 
   const handleFanMode = async (mode) => {
-    const payloadIndex = 'fan' + fanNumber + 'Mode';
     const payload = {
-      [payloadIndex]: mode,
+      fan: fanNumber,
+      mode: mode,
     };
     const urlEncodedBody = new URLSearchParams(payload).toString();
     try {
@@ -24,11 +24,9 @@ const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
 
       if (!response.ok) {
         throw new Error(`POST failed with status: ${response.status}`);
-        console.error('API Error Response:', errorText);
-        throw new Error(`POST failed with status: ${response.status}`);
       }
-      // The result will be the object you sent, plus the new 'id'
       const result = await response.json();
+      console.log(result);
       setLoading(false);
       setError(false);
     } catch (error) {

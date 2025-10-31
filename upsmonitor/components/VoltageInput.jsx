@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { CloudUpload } from 'lucide-react-native';
 
 const VoltageInput = ({ ac, voltage, disconnect, endpoint }) => {
-  const [value, setValue] = useState(voltage);
+  const [value, setValue] = useState(String(voltage || ''));
   const [loading, setLoading] = useState(false);
 
-  const handleVoltage = async (value) => {
+  const handleVoltage = async (valueString) => {
+    const integerValue = parseInt(valueString, 10);
+
+    if (isNaN(integerValue)) {
+      console.error('Input is not a valid number. API call blocked.');
+      setLoading(false);
+      return;
+    }
+
     const payload = {
       start: !disconnect,
-      voltage: value,
+      voltage: integerValue,
     };
 
     const urlEncodedBody = new URLSearchParams(payload).toString();
@@ -27,10 +35,8 @@ const VoltageInput = ({ ac, voltage, disconnect, endpoint }) => {
         throw new Error(`POST failed with status: ${response.status}`);
       }
 
-      // The result will be the object you sent, plus the new 'id'
       const result = await response.json();
       console.log('Successfully Posted:', result);
-      // fanSetter(mode);
     } catch (error) {
       console.error('Error during POST:', error.message);
       setLoading(false);
@@ -38,19 +44,19 @@ const VoltageInput = ({ ac, voltage, disconnect, endpoint }) => {
   };
 
   useEffect(() => {
-    if (value != voltage) {
+    if (value !== String(voltage || '')) {
       setLoading(true);
       handleVoltage(value);
     } else {
       setLoading(false);
     }
-  }, [value, voltage]);
+  }, [value, voltage, endpoint]);
 
   useEffect(() => {
-    setValue(voltage);
+    // When the external 'voltage' prop changes, update the local state (convert to string)
+    setValue(String(voltage || ''));
   }, [voltage]);
 
-  console.log(voltage);
   return (
     <View className="flex flex-row justify-between">
       <Text className="flex flex-col px-2 text-gray-200">
@@ -61,18 +67,28 @@ const VoltageInput = ({ ac, voltage, disconnect, endpoint }) => {
           <TextInput
             value={value}
             onChangeText={setValue}
-            className="flex max-w-5 flex-col text-center text-gray-200"
+            keyboardType="numeric"
+            style={styles.textInput}
           />
           <Text className="flex flex-col text-gray-200">Volts</Text>
           {loading ? (
             <CloudUpload className="ml-1 h-4 w-4 animate-bounce text-green-300" />
           ) : (
-            <View></View>
+            <View />
           )}
         </View>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  textInput: {
+    color: 'white',
+    width: 10,
+    textAlign: 'center',
+    padding: 0,
+  },
+});
 
 export default VoltageInput;

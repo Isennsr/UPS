@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react';
 import { CloudUpload } from 'lucide-react-native';
-import { View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 const TempInput = ({ fanNumber, start, temp, endpoint }) => {
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState(temp);
+  const [value, setValue] = useState(String(temp || ''));
+  const handleTemp = async (valueString) => {
+    const integerValue = parseInt(valueString, 10);
 
-  const handleTemp = async (value) => {
+    if (isNaN(integerValue)) {
+      console.error('Input is not a valid number. API call blocked.');
+      setLoading(false);
+      return;
+    }
+
     const payload = {
       fan: fanNumber,
       start: start,
-      temp: value,
+      temp: integerValue,
     };
 
     const urlEncodedBody = new URLSearchParams(payload).toString();
@@ -28,10 +35,8 @@ const TempInput = ({ fanNumber, start, temp, endpoint }) => {
         throw new Error(`POST failed with status: ${response.status}`);
       }
 
-      // The result will be the object you sent, plus the new 'id'
       const result = await response.json();
       console.log('Successfully Posted:', result);
-      // fanSetter(mode);
     } catch (error) {
       console.error('Error during POST:', error.message);
       setLoading(false);
@@ -39,16 +44,15 @@ const TempInput = ({ fanNumber, start, temp, endpoint }) => {
   };
 
   useEffect(() => {
-    if (value != temp) {
+    if (value !== String(temp || '')) {
       setLoading(true);
       handleTemp(value);
     } else {
       setLoading(false);
     }
-  }, [value, temp]);
-
+  }, [value, temp, endpoint]);
   useEffect(() => {
-    setValue(temp);
+    setValue(String(temp || ''));
   }, [temp]);
 
   return (
@@ -60,18 +64,27 @@ const TempInput = ({ fanNumber, start, temp, endpoint }) => {
         <TextInput
           value={value}
           onChangeText={setValue}
-          className="max-w-6 text-center text-gray-200"
           keyboardType="numeric"
+          style={styles.textInput}
         />
         <Text className="text-gray-200">°c</Text>
         {loading ? (
           <CloudUpload className="ml-1 h-4 w-4 animate-bounce text-green-300" />
         ) : (
-          <View></View>
+          <View />
         )}
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  textInput: {
+    color: 'white',
+    width: 10,
+    textAlign: 'center',
+    padding: 0,
+  },
+});
 
 export default TempInput;

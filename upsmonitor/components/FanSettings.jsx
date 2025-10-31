@@ -37,16 +37,16 @@ const FanSettings = ({
         </Text>
         <View className="mb-3 w-full border-b border-indigo-300"></View>
         <View className="flex flex-col">
-          <TempInput fanNumber={1} start={1} temp={data.fan1StartUpTemp} endpoint={endpoint}/>
+          <TempInput fanNumber={1} start={1} temp={data.fan1StartUpTemp} endpoint={endpoint} />
           <View className="my-1 border-b border-slate-700"></View>
-          <TempInput fanNumber={1} start={0} temp={data.fan1ShutOffTemp} endpoint={endpoint}/>
+          <TempInput fanNumber={1} start={0} temp={data.fan1ShutOffTemp} endpoint={endpoint} />
           <View className="my-1 border-b border-slate-700"></View>
-          <TempInput fanNumber={2} start={1} temp={data.fan2StartUpTemp} endpoint={endpoint}/>
+          <TempInput fanNumber={2} start={1} temp={data.fan2StartUpTemp} endpoint={endpoint} />
           <View className="my-1 border-b border-slate-700"></View>
-          <TempInput fanNumber={2} start={0} temp={data.fan1ShutOffTemp} endpoint={endpoint}/>
+          <TempInput fanNumber={2} start={0} temp={data.fan2ShutOffTemp} endpoint={endpoint} />
         </View>
 
-        <VoltageControl data={data} endpoint={endpoint}/>
+        <VoltageControl data={data} endpoint={endpoint} />
       </View>
     </View>
   );

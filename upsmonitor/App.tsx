@@ -2,7 +2,7 @@ import Welcome from 'components/Welcome';
 import Battery from 'components/Battery';
 import FanSettings from 'components/FanSettings';
 import './global.css';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import Footer from 'components/Footer';
 import { useState, useEffect } from 'react';
 
@@ -95,17 +95,17 @@ export default function App() {
             />
           </View>
         ) : loading ? (
-          <div
+          <View
             className="relative m-3 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
             role="alert">
-            <strong className="font-bold">Error!</strong>
-            <span className="ml-2 block sm:inline">{error}</span>
-          </div>
+            <Text className="font-bold">Error!</Text>
+            <Text className="ml-2 block sm:inline">{error}</Text>
+          </View>
         ) : (
-          <div className="flex flex-col items-center justify-center p-10">
+          <View className="flex flex-col items-center justify-center p-10">
             <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
-            <p className="mt-4 text-gray-600">Loading data...</p>
-          </div>
+            <Text className="mt-4 text-gray-600">Loading data...</Text>
+          </View>
         )}
       </View>
       <Footer />

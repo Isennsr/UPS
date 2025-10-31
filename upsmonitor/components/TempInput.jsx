@@ -23,7 +23,7 @@ const TempInput = ({ fanNumber, start, temp, endpoint }) => {
     const urlEncodedBody = new URLSearchParams(payload).toString();
     try {
       setLoading(true);
-      const response = await fetch(`${endpoint}/set/fan/mode`, {
+      const response = await fetch(`${endpoint}/set/fan/temp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

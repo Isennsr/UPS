@@ -83,7 +83,7 @@ const FanStatus = ({ temp1, temp2, tempReadings, fan1IsRunning, fan2IsRunning })
                   ? 'flex flex-row items-center rounded bg-green-400 px-1'
                   : 'flex flex-row items-center rounded bg-red-400 px-1'
               }>
-              {fan1 ? <Text>On</Text> : <Text>Off</Text>}
+              {fan1 ? <Text className="mr-1">On</Text> : <Text className="mr-1">Off</Text>}
               {fan1 ? (
                 <FanIcon className="ml-1 flex h-3 w-3 animate-spin flex-col" />
               ) : (
@@ -100,7 +100,7 @@ const FanStatus = ({ temp1, temp2, tempReadings, fan1IsRunning, fan2IsRunning })
                   ? 'flex flex-row items-center rounded bg-green-400 px-1'
                   : 'flex flex-row items-center rounded bg-red-400 px-1'
               }>
-              {fan2 ? <Text>On</Text> : <Text>Off</Text>}
+              {fan2 ? <Text className="mr-1">On</Text> : <Text className="mr-1">Off</Text>}
               {fan2 ? (
                 <FanIcon className="ml-1 flex h-3 w-3 animate-spin flex-col" />
               ) : (

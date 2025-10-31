@@ -88,8 +88,8 @@ export default function App() {
               endpoint={API_ENDPOINT}
               fan1mode={data.fan1Mode}
               fan2mode={data.fan2Mode}
-              fan1IsRunning={data.fan1IsRunning}
-              fan2IsRunning={data.fan2IsRunning}
+              fan1IsRunning={data.f1IsRunning}
+              fan2IsRunning={data.f2IsRunning}
               data={data}
               temperatureReading={temperatureReading}
             />

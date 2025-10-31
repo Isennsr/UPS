@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
-import { FanIcon } from 'lucide-react';
+import { FanIcon } from 'lucide-react-native';
 
 // --- Utility function to determine highlight colors based on temperature ---
 const getThresholdColor = (temp) => {

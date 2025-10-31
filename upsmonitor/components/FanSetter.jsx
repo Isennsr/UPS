@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import React from 'react';
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react-native';
 const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -42,22 +42,22 @@ const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
         <Text className="flex flex-row text-gray-200">Fan{fanNumber}:</Text>
         <View className="flex flex-row items-center rounded text-white">
           <View
-            className={`${fanMode == 1 ? 'bg-blue-600 inset-shadow-xs inset-shadow-gray-800' : 'bg-gray-600 hover:bg-gray-500'} text-centertransition-all flex w-12 cursor-pointer flex-col rounded-l p-1 px-1 duration-400 ease-in-out`}
+            className={`${fanMode == 1 ? 'inset-shadow-xs inset-shadow-gray-800 bg-blue-600' : 'bg-gray-600 hover:bg-gray-500'} text-centertransition-all duration-400 flex w-12 cursor-pointer flex-col rounded-l p-1 px-1 ease-in-out`}
             onTouchStart={() => handleFanMode(1)}>
             Auto
           </View>
           <View
-            className={`${fanMode == 2 ? 'bg-green-600 shadow-inner inset-shadow-xs inset-shadow-gray-800' : 'bg-gray-600 hover:bg-gray-500'} flex w-12 cursor-pointer flex-col p-1 px-1 text-center transition-all duration-400 ease-in-out`}
+            className={`${fanMode == 2 ? 'inset-shadow-xs inset-shadow-gray-800 bg-green-600 shadow-inner' : 'bg-gray-600 hover:bg-gray-500'} duration-400 flex w-12 cursor-pointer flex-col p-1 px-1 text-center transition-all ease-in-out`}
             onTouchStart={() => handleFanMode(2)}>
             On
           </View>
           <View
-            className={`${fanMode == 3 ? 'bg-red-600 inset-shadow-xs inset-shadow-gray-800' : 'bg-gray-600 hover:bg-gray-500'} flex w-12 cursor-pointer flex-col rounded-r p-1 px-1 text-center transition-all duration-400 ease-in-out`}
+            className={`${fanMode == 3 ? 'inset-shadow-xs inset-shadow-gray-800 bg-red-600' : 'bg-gray-600 hover:bg-gray-500'} duration-400 flex w-12 cursor-pointer flex-col rounded-r p-1 px-1 text-center transition-all ease-in-out`}
             onTouchStart={() => handleFanMode(3)}>
             Off
           </View>
           {loading ? (
-            <LoaderCircle className="ml-1 animate-spin text-rose-300 duration-2000" />
+            <LoaderCircle className="duration-2000 ml-1 animate-spin text-rose-300" />
           ) : (
             <View></View>
           )}

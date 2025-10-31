@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import ProgressBar from './ProgressBar.jsx';
-import { BatteryMedium, BatteryFull, BatteryCharging, BatteryLow } from 'lucide-react';
+import { BatteryMedium, BatteryFull, BatteryCharging, BatteryLow } from 'lucide-react-native';
 
 const Battery = ({ number, voltage, current }) => {
   // --- Battery State Logic ---

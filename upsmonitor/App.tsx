@@ -6,7 +6,7 @@ import { View, ScrollView } from 'react-native';
 import Footer from 'components/Footer';
 import { useState, useEffect } from 'react';
 
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react-native';
 
 const API_ENDPOINT = 'http://192.168.4.1';
 

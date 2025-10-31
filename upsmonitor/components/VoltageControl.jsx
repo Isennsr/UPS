@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from 'react-native';
+import { View, Text} from 'react-native';
 import { useState } from 'react';
 import VoltageInput from './VoltageInput';
 

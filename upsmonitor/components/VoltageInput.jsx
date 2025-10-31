@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import { CloudUpload } from 'lucide-react';
+import { CloudUpload } from 'lucide-react-native';
 
 const VoltageInput = ({ ac, voltage, disconnect }) => {
   const [value, setValue] = useState(voltage);

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text } from 'react-native-native';
 import React from 'react';
 import FanSetter from './FanSetter';
 import VoltageControl from './VoltageControl';

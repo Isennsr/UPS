@@ -13,14 +13,12 @@ const TRACK_COLOR = '#104e64'; // gray-300 (Track)
 // ARC CONFIGURATION
 const ARC_PERCENTAGE = 0.7; // 70% of a full circle
 
-// Rotation to position the 70% arc at the bottom-center (54deg to center gap + 90deg to rotate to bottom)
-const FINAL_ARC_ROTATION = 144;
+// Rotation to position the 70% arc at the bottom-center 
+const FINAL_ARC_ROTATION = 144; 
 
 const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }) => {
   const absoluteValue = Math.abs(value);
 
-  // The maximum magnitude for the progress bar is determined by max
-  // We assume min is 0 or less, but for progress calculation, we treat the range as 0 to max.
   const progressMax = Math.abs(max);
 
   // 1. Calculate Progress (Clamped) based on absolute value
@@ -59,6 +57,7 @@ const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }
   return (
     <View style={{ width: size, height: size, position: 'relative' }}>
       <Svg width="100%" height="100%" viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}>
+        
         {/* Track Circle */}
         <Circle
           stroke={TRACK_COLOR}
@@ -68,15 +67,16 @@ const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }
           cx={CENTER}
           cy={CENTER}
           fill="transparent"
-          style={{
-            transform: [{ rotate: `${FINAL_ARC_ROTATION}deg` }],
-            transformOrigin: '50% 50%',
-          }}
+          // Correct React Native SVG rotation props
+          rotation={FINAL_ARC_ROTATION} 
+          originX={CENTER}
+          originY={CENTER}
         />
 
         {/* Progress Circle */}
         <Circle
           stroke={PRIMARY_COLOR}
+          strokeLinecap="round" 
           strokeWidth={stroke}
           strokeDasharray={FULL_CIRCUMFERENCE}
           strokeDashoffset={offset}
@@ -84,14 +84,14 @@ const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }
           cx={CENTER}
           cy={CENTER}
           fill="transparent"
-          style={{
-            transform: [{ rotate: `${FINAL_ARC_ROTATION}deg` }],
-            transformOrigin: '50% 50%',
-          }}
+          // Correct React Native SVG rotation props
+          rotation={FINAL_ARC_ROTATION}
+          originX={CENTER}
+          originY={CENTER}
         />
       </Svg>
 
-      {/* Text Layer - Uses original 'value' to display the correct sign */}
+      {/* Text Layer */}
       <View
         style={{
           position: 'absolute',
@@ -103,7 +103,7 @@ const ProgressBar = ({ value = 50, min = 0, max = 100, stroke = 12, size = 100 }
           alignItems: 'center',
         }}>
         <Text style={{ color: PRIMARY_COLOR, fontSize: 18, fontWeight: 'bold' }}>
-          {/* Display original value, which includes the negative sign if present */}
+          {/* Display original value */}
           {value.toFixed(2)}
         </Text>
       </View>

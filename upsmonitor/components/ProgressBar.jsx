@@ -1,5 +1,5 @@
 import React from 'react';
-import { Svg, Circle, G, ForeignObject } from 'react-native-svg';
+import Svg, { Path, Circle } from 'react-native-svg';
 import { View, Text } from 'react-native';
 
 const CENTER = 50;

@@ -26,7 +26,7 @@ const FanSettings = ({
         <Text className="mx-auto flex flex-row justify-between text-lg text-indigo-300">
           Fan Settings
         </Text>
-        <View className="mb-3 h-0.5 w-full border-b-1 border-indigo-300"></View>
+        <View className="mb-3 h-0.5 w-full border-b border-indigo-300"></View>
         <View className="flex flex-col justify-around">
           <FanSetter endpoint={endpoint} fanNumber={1} fanMode={fan1mode} />
           <FanSetter endpoint={endpoint} fanNumber={2} fanMode={fan2mode} />
@@ -35,18 +35,18 @@ const FanSettings = ({
         <Text className="mx-auto mb-2 text-xs text-indigo-300">
           (Only works when fan mode is "Auto")
         </Text>
-        <View className="mb-3 w-full border-b-1 border-indigo-300"></View>
+        <View className="mb-3 w-full border-b border-indigo-300"></View>
         <View className="flex flex-col">
-          <TempInput fanNumber={1} start={1} temp={data.fan1StartUpTemp} />
+          <TempInput fanNumber={1} start={1} temp={data.fan1StartUpTemp} endpoint={endpoint}/>
           <View className="my-1 border-b border-slate-700"></View>
-          <TempInput fanNumber={1} start={0} temp={data.fan1ShutOffTemp} />
+          <TempInput fanNumber={1} start={0} temp={data.fan1ShutOffTemp} endpoint={endpoint}/>
           <View className="my-1 border-b border-slate-700"></View>
-          <TempInput fanNumber={2} start={1} temp={data.fan2StartUpTemp} />
+          <TempInput fanNumber={2} start={1} temp={data.fan2StartUpTemp} endpoint={endpoint}/>
           <View className="my-1 border-b border-slate-700"></View>
-          <TempInput fanNumber={2} start={0} temp={data.fan1ShutOffTemp} />
+          <TempInput fanNumber={2} start={0} temp={data.fan1ShutOffTemp} endpoint={endpoint}/>
         </View>
 
-        <VoltageControl data={data} />
+        <VoltageControl data={data} endpoint={endpoint}/>
       </View>
     </View>
   );

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { CloudUpload } from 'lucide-react-native';
 
-const VoltageInput = ({ ac, voltage, disconnect }) => {
+const VoltageInput = ({ ac, voltage, disconnect, endpoint }) => {
   const [value, setValue] = useState(voltage);
   const [loading, setLoading] = useState(false);
 
@@ -24,8 +24,6 @@ const VoltageInput = ({ ac, voltage, disconnect }) => {
       });
 
       if (!response.ok) {
-        throw new Error(`POST failed with status: ${response.status}`);
-        console.error('API Error Response:', errorText);
         throw new Error(`POST failed with status: ${response.status}`);
       }
 
@@ -62,7 +60,7 @@ const VoltageInput = ({ ac, voltage, disconnect }) => {
         <View className="flex w-full flex-row rounded bg-gray-600 p-1">
           <TextInput
             value={value}
-            onChange={(e) => setValue(e.value)}
+            onChangeText={setValue}
             className="flex max-w-5 flex-col text-center text-gray-200"
           />
           <Text className="flex flex-col text-gray-200">Volts</Text>

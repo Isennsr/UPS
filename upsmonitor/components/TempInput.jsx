@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CloudUpload } from 'lucide-react-native';
 import { View, Text, TextInput } from 'react-native';
 
-const TempInput = ({ fanNumber, start, temp }) => {
+const TempInput = ({ fanNumber, start, temp, endpoint }) => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(temp);
 
@@ -25,8 +25,6 @@ const TempInput = ({ fanNumber, start, temp }) => {
       });
 
       if (!response.ok) {
-        throw new Error(`POST failed with status: ${response.status}`);
-        console.error('API Error Response:', errorText);
         throw new Error(`POST failed with status: ${response.status}`);
       }
 

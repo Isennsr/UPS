@@ -50,7 +50,7 @@ const FanStatus = ({ temp1, temp2, tempReadings, fan1IsRunning, fan2IsRunning })
     <View className="flex w-full flex-col rounded-md px-3">
       <Text className="flex flex-row justify-around text-lg text-indigo-300">Fan Status</Text>
 
-      <View className="mb-3 flex w-full flex-row border-b-1 border-indigo-300"></View>
+      <View className="mb-3 flex w-full flex-row border-b border-indigo-300"></View>
       <View className="flex flex-col justify-around">
         <View className="my-1 flex flex-col">
           {/* Sensor 1 Reading */}

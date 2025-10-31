@@ -1,9 +1,9 @@
-import Welcome from 'components/Welcome';
-import Battery from 'components/Battery';
-import FanSettings from 'components/FanSettings';
+import Welcome from './components/Welcome';
+import Battery from './components/Battery';
+import FanSettings from './components/FanSettings';
 import './global.css';
 import { View, ScrollView, Text } from 'react-native';
-import Footer from 'components/Footer';
+import Footer from './components/Footer';
 import { useState, useEffect } from 'react';
 
 import { Loader2 } from 'lucide-react-native';

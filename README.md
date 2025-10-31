@@ -28,5 +28,5 @@ sudo npx expo install nativewind@preview react-native-css react-native-reanimate
 sudo npx expo install --dev tailwindcss @tailwindcss/postcss postcss
 sudo npm install lucide-react-native
 sudo npx expo install react-native-svg
-sudo nom install
+sudo npm install
 ```

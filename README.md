@@ -21,3 +21,12 @@ can be built for Android and IOS.
 <img width="465" height="903" alt="Screenshot 2025-10-30 042040" src="https://github.com/user-attachments/assets/cd9b7139-976f-4e44-b209-5311fac787fa" />
 
 
+## Installing
+#### Requirements
+```bash
+sudo npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+sudo npx expo install --dev tailwindcss @tailwindcss/postcss postcss
+sudo npm install lucide-react-native
+sudo npx expo install react-native-svg
+sudo nom install
+```

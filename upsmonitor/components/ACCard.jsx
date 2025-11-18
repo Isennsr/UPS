@@ -10,7 +10,6 @@ const ACCard = ({ data }) => {
       </View>
       <Text className="text-md mt-2 ml-3 text-white">
         {data.charging ? 'Connected' : 'Not connected'}
-        Connected
       </Text>
     </View>
   );

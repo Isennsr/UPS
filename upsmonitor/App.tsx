@@ -5,6 +5,7 @@ import './global.css';
 import { View, ScrollView, Text } from 'react-native';
 import Footer from './components/Footer';
 import { useState, useEffect } from 'react';
+import Cards from './components/Cards'
 
 import { Loader2 } from 'lucide-react-native';
 
@@ -84,6 +85,7 @@ export default function App() {
           <View className="mx-2 flex flex-col">
             <Battery number={1} voltage={data.vBat} current={data.IBat1} />
             <Battery number={2} voltage={data.vBat} current={data.IBat2} />
+            <Cards data={data}/>
             <FanSettings
               endpoint={API_ENDPOINT}
               fan1mode={data.fan1Mode}

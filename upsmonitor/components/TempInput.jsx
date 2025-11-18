@@ -81,7 +81,7 @@ const TempInput = ({ fanNumber, start, temp, endpoint }) => {
 const styles = StyleSheet.create({
   textInput: {
     color: 'white',
-    width: 10,
+    width: 20,
     textAlign: 'center',
     padding: 0,
   },

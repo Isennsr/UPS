@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import { useState } from 'react';
 import React from 'react';
-import { LoaderCircle } from 'lucide-react-native';
+import { LoaderCircle } from 'lucide-react';
 const FanSetter = ({ fanMode, fanNumber, endpoint }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

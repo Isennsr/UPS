@@ -21,6 +21,7 @@ const FanSettings = ({
         tempReadings={temperatureReading}
         fan1IsRunning={fan1IsRunning}
         fan2IsRunning={fan2IsRunning}
+    data={data}
       />
       <View className="my-2 flex w-full flex-col rounded-md px-3 py-2">
         <Text className="mx-auto flex flex-row justify-between text-lg text-indigo-300">

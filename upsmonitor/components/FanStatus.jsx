@@ -1,18 +1,18 @@
 import { View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
-import { FanIcon } from 'lucide-react-native';
+import { FanIcon } from 'lucide-react';
 
 // --- Utility function to determine highlight colors based on temperature ---
 const getThresholdColor = (temp) => {
   const t = parseFloat(temp) || 0;
 
-  if (t > 30) {
+  if (t > 40) {
     // Greater than 30: Red
     return {
       bg: 'bg-red-500',
       text: 'text-white', // Use white text for contrast on dark background
     };
-  } else if (t >= 27) {
+  } else if (t >= 35) {
     // 20 up to 30: Yellow/Amber
     return {
       bg: 'bg-yellow-400',
@@ -29,7 +29,7 @@ const getThresholdColor = (temp) => {
 
 // -----------------------------------------------------------------------
 
-const FanStatus = ({ temp1, temp2, tempReadings, fan1IsRunning, fan2IsRunning }) => {
+const FanStatus = ({ temp1, temp2, tempReadings, fan1IsRunning, fan2IsRunning, data }) => {
   // Setting up states
   const [fan1, setFan1] = useState(fan1IsRunning);
   const [fan2, setFan2] = useState(fan2IsRunning);
@@ -41,7 +41,10 @@ const FanStatus = ({ temp1, temp2, tempReadings, fan1IsRunning, fan2IsRunning })
   // Dynamic classes for the highlighted reading (value + 'c')
   const highlightClasses1 = `px-1 rounded ${colors1.bg} ${colors1.text}`;
   const highlightClasses2 = `px-1 rounded ${colors2.bg} ${colors2.text}`;
-
+  useEffect(() => {
+    setColors1(getThresholdColor(temp1));
+    setColors2(getThresholdColor(temp2));
+  }, [temp1, temp2]);
   useEffect(() => {
     setFan1(fan1IsRunning);
     setFan2(fan2IsRunning);

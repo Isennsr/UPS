@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import { Loader2, Zap, BadgeCheck, RefreshCw } from 'lucide-react-native';
+import { Loader2, Zap, BadgeCheck, RefreshCw } from 'lucide-react';
 
 const Welcome = ({ loading, lastUpdated }) => {
   return (

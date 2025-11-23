@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CloudUpload } from 'lucide-react-native';
+import { CloudUpload } from 'lucide-react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 const TempInput = ({ fanNumber, start, temp, endpoint }) => {
